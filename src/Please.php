@@ -27,11 +27,7 @@ class Please
 
     public function get()
     {
-        if ($this->result instanceof \Exception) {
-            throw $this->result;
-        } else {
-            return $this->result;
-        }
+        return $this->result;
     }
 
     public function onSuccess($callable)
@@ -45,6 +41,17 @@ class Please
     {
         if ($this->isFailure) {
             return new Please($callable, $this->result);
+        }
+    }
+
+    public function on($successCallable, $failureCallable)
+    {
+        if ($this->isSuccess) {
+            return new Please($successCallable, $this->result);
+        }
+
+        if ($this->isFailure) {
+            return new Please($failureCallable, $this->result);
         }
     }
 }

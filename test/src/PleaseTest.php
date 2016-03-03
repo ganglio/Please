@@ -54,13 +54,10 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($res->isFailure);
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testFailureGet()
     {
         $res = new Please($this->inverse, 0);
-        $res->get();
+        $this->assertTrue($res->get() instanceof \Exception);
     }
 
     public function testOnFailure()
@@ -71,6 +68,22 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
                 return $e->getMessage();
             })->get(),
             "Division by zero"
+        );
+    }
+
+    public function testOn()
+    {
+        $res = new Please($this->inverse, 0);
+        $this->assertEquals(
+            $res->on(
+                function ($v) {
+                    return "Result:" . $v;
+                },
+                function ($e) {
+                    return "Error: " .  $e->getMessage();
+                }
+            )->get(),
+            "Error: Division by zero"
         );
     }
 }
