@@ -95,3 +95,41 @@ echo (new Please($inverse, $unknown_divisor))
     }
   )->get();
 ```
+
+And now a slighly more complex example:
+
+Let's immagine we have an array of strings, some of which are json encoded objects:
+
+```PHP
+$strings = [
+  'not json',
+  '{"a":3,"b":4}',
+  'still not json',
+  '{"c":5}',
+];
+```
+
+And a wrapper to `json_decode` throwing and exception on error:
+
+```PHP
+$json_decoder_exception = function ($string) {
+  $out = json_decode($string);
+  if (json_last_error() != JSON_ERROR_NONE) {
+    throw new \Exception("Invalid JSON");
+  }
+  return $out;
+};
+```
+
+We can then decode and filter them using `Please`:
+
+```PHP
+$results = array_filter(
+  array_map(function ($s) use ($json_decoder_exception) {
+    return new Please($json_decoder_exception, $s);
+  }, $strings),
+  function ($e) {
+    return $e->isSuccess;
+  }
+);
+```

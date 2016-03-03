@@ -41,10 +41,10 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
     {
         $res = new Please($this->inverse, 2);
         $this->assertEquals(
+            2,
             $res->onSuccess(function ($v) {
                 return $v*4;
-            })->get(),
-            2
+            })->get()
         );
     }
 
@@ -64,10 +64,10 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
     {
         $res = new Please($this->inverse, 0);
         $this->assertEquals(
+            "Division by zero",
             $res->onFailure(function (\Exception $e) {
                 return $e->getMessage();
-            })->get(),
-            "Division by zero"
+            })->get()
         );
     }
 
@@ -75,6 +75,7 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
     {
         $res = new Please($this->inverse, 0);
         $this->assertEquals(
+            "Error: Division by zero",
             $res->on(
                 function ($v) {
                     return "Result:" . $v;
@@ -82,8 +83,39 @@ class PleaseTest extends \PHPUnit_Framework_TestCase
                 function ($e) {
                     return "Error: " .  $e->getMessage();
                 }
-            )->get(),
-            "Error: Division by zero"
+            )->get()
+        );
+    }
+
+    public function testABitMore()
+    {
+        $strings = [
+            'not json',
+            '{"a":3,"b":4}',
+            'still not json',
+            '{"c":5}',
+        ];
+
+        $json_decoder_exception = function ($string) {
+            $out = json_decode($string);
+            if (json_last_error() != JSON_ERROR_NONE) {
+                throw new \Exception("Invalid JSON");
+            }
+            return $out;
+        };
+
+        $results = array_filter(
+            array_map(function ($s) use ($json_decoder_exception) {
+                return new Please($json_decoder_exception, $s);
+            }, $strings),
+            function ($e) {
+                return $e->isSuccess;
+            }
+        );
+
+        $this->assertEquals(
+            2,
+            count($results)
         );
     }
 }
