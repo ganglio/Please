@@ -1,7 +1,9 @@
-# Project Name Here
+# PHP Functional Try
 
-[![Latest Stable Version](https://poser.pugx.org/<package id here>/v/stable)](https://packagist.org/packages/<package id here>)
-[![Build Status](https://travis-ci.org/<package id here>)](https://travis-ci.org/<package id here>)
-[![codecov.io](http://codecov.io/github/<package id here>/coverage.svg?branch=master)](http://codecov.io/github/<package id here>?branch=master)
-[![Code Climate](https://codeclimate.com/github/<package id here>/badges/gpa.svg)](https://codeclimate.com/<package id here>/php-curry)
-[![License](https://poser.pugx.org/<package id here>/license)](https://packagist.org/packages/<package id here>)
+[![Latest Stable Version](https://poser.pugx.org/ganglio/Please/v/stable)](https://packagist.org/packages/ganglio/Please)
+[![Build Status](https://travis-ci.org/ganglio/Please.svg?branch=master)](https://travis-ci.org/ganglio/Please)
+[![codecov.io](http://codecov.io/github/ganglio/Please/coverage.svg?branch=master)](http://codecov.io/github/ganglio/Please?branch=master)
+[![Code Climate](https://codeclimate.com/github/ganglio/Please/badges/gpa.svg)](https://codeclimate.com/ganglio/Please)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ganglio/Please/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ganglio/Please/?branch=master)
+[![License](https://poser.pugx.org/ganglio/Please/license)](https://packagist.org/packages/ganglio/Please)
+

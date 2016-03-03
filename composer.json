@@ -1,20 +1,20 @@
 {
-    "name": "<package id here>",
+    "name": "ganglio/please",
     "type": "library",
-    "description": "<decription here>",
-    "keywords": ["<keywords here>"],
-    "homepage": "http://www.github.com/<package id here>",
+    "description": "PHP Functional Try",
+    "keywords": ["Try", "Catch", "Functional"],
+    "homepage": "http://www.github.com/ganglio/Please",
     "license": "MIT",
     "authors": [
         {
-            "name": "<your name>",
-            "email": "<your email>"
+            "name": "Roberto Torella",
+            "email": "roberto.torella@gmail.com"
         }
     ],
     "autoload": {
         "psr-0": {
-            "<project namespace>": "src",
-            "<tests namespace>": "test/src"
+            "ganglio": "src",
+            "ganglio/tests": "test/src"
         },
         "classmap" : [
             "src",
